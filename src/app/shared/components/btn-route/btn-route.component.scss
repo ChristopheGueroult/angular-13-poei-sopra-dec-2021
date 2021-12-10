@@ -1,0 +1,8 @@
+a {
+  background: var(--app-primary);
+  color: var(--app-light);
+  &:hover {
+    background: var(--app-primary-dark);
+    color: var(--app-light);
+  }
+}

@@ -1,0 +1,22 @@
+header {
+  height: 80px;
+  width: 100%;
+  z-index: 2;
+  padding: 15px;
+  & div:last-child {
+    padding-left: 15px;
+  }
+}
+.ui {
+  height: 100vh;
+}
+nav {
+  padding-top: 80px;
+}
+footer,
+header {
+  background: var(--app-light);
+}
+main {
+  background: var(--app-main-bg-color);
+}

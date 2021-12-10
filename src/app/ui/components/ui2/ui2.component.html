@@ -1,0 +1,27 @@
+<div class="d-flex ui flex-column">
+  <header class="position-fixed d-flex align-items-center">
+    <div>
+      <span (click)="toggle()">
+        <div *ngIf="!open; then thenBlock else elseBlock"></div>
+
+        <ng-template #thenBlock>
+          <ng-content select=".tr-open"></ng-content>
+        </ng-template>
+
+        <ng-template #elseBlock>
+          <ng-content select=".tr-close"></ng-content>
+        </ng-template>
+      </span>
+    </div>
+    <div class="flex-grow-1">
+      <ng-content select=".tr-header"></ng-content>
+    </div>
+  </header>
+  <nav>
+    <ng-content select=".tr-nav"></ng-content>
+  </nav>
+  <main class="flex-grow-1"></main>
+  <footer>
+    <ng-content select=".tr-footer"></ng-content>
+  </footer>
+</div>

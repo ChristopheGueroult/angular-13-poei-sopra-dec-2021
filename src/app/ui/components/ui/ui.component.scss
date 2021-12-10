@@ -1,0 +1,62 @@
+@import "~/src/stylings/layout";
+
+header {
+  position: fixed;
+  height: 80px;
+  width: 100%;
+  z-index: 2;
+  padding: 15px;
+  -webkit-box-shadow: 0px 9px 11px -11px rgba(0, 0, 0, 0.81);
+  box-shadow: 0px 9px 11px -11px rgba(0, 0, 0, 0.81);
+  & div:last-child {
+    padding-left: 15px;
+  }
+  span {
+    display: inline-block;
+    width: 25px;
+  }
+}
+.ui {
+  height: 100vh;
+}
+nav {
+  width: 250px;
+  transition: all 0.1s;
+}
+.close-nav nav {
+  width: 0;
+  overflow: hidden;
+}
+aside {
+  background: var(--app-aside-bg-color);
+  height: 100%;
+  z-index: 1;
+}
+main {
+  padding-top: 80px;
+}
+
+main .shadow {
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+footer,
+header {
+  background: var(--app-light);
+}
+main > div {
+  background: var(--app-main-bg-color);
+}
+@media (min-width: $sm-breakpoint) {
+  main .shadow {
+    display: none;
+  }
+  .content {
+    margin-left: 250px;
+  }
+  .close-nav .content {
+    margin-left: 0;
+  }
+}

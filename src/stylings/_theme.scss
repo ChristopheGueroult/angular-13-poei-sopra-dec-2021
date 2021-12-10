@@ -1,0 +1,23 @@
+:root {
+  --app-light: rgb(255, 255, 255);
+  // --app-light: rgb(201, 200, 200);
+  --app-main-bg-color: rgb(230, 230, 230);
+  // --app-main-bg-color: rgb(177, 176, 176);
+  --app-aside-bg-color: rgb(158, 158, 158);
+  // --app-aside-bg-color: rgb(80, 80, 80);
+  --app-line-color: rgb(95, 95, 95);
+  --app-line-color-lighter: rgb(196, 195, 195);
+
+  // pour les couleurs de typos
+  --app-dark: rgb(31, 31, 31);
+
+  // charte graphique et déclinaisons
+  --app-primary: rgb(105, 22, 97);
+  --app-primary-dark: rgb(56, 5, 51);
+  --app-secondary: rgb(151, 225, 248);
+
+  // pour les boites d'alert
+  --app-error: rgb(236, 89, 89);
+  --app-warning: rgb(241, 157, 78);
+  --app-success: rgb(94, 233, 129);
+}

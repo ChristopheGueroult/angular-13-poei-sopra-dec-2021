@@ -1,0 +1,46 @@
+## REGES DE NOMMAGE
+
+noms en anglais uniquement pour les composants de l'application
+
+## CoreModule
+
+Doit etre importé uniquement sur AppModule et dans aucun autre module
+de l'application.
+Respect du style guide angular et évite ainsi les dépendances circulaires.
+Rôle du CoreModule : Défini via les exports les modules qui seront chargés
+au démarrage de l'application.
+
+## AppModule
+
+Rôle : Démarre l'application et importe le CoreModule et La config initiale du
+Router via l'import de AppRoutingModule.
+
+## Transclusions :
+
+Pour les transclusions utiliser les selecteurs de class avec le préfix tr
+ex : <ng-content select=".tr-header"></ng-content> et <some-element class="tr-header></some-element>
+
+## icons
+
+Un module icons spécifique pour tous les icons de notre appli.
+Préfix icon- pour tous les noms de webcomponents crées pour nos icons
+Dans les vues de l'appli on utilise que des instances de nos icons
+
+Un ptit mot doux de tonton Cricri
+
+## Templates Module and Templates components
+
+Module spécifique pour les gabarits de pages qui exporte deux angular conponents pour nos 2
+gabarits de pages.
+Toutes les pages (vues) de l'appli doivent être projetées dans un component template
+La projection des contenus de nos page dans nos templates se fait à l'aide d'un ng-content
+
+## découpage en modules
+
+A la racine du projet ne doit y avoir que des modules et rien d'autre
+
+## components pour les vues de l'application (les pages)
+
+Un component intelligent par vue (page). préfixer tous ces component par le
+mot-clé "page", tous les mettre dans des répertoires "pages"
+Doivent etre directement dans les dossiers correspondant aux modules
