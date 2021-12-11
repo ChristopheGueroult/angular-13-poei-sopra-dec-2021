@@ -31,6 +31,8 @@ aside {
   background: var(--app-aside-bg-color);
   height: 100%;
   z-index: 1;
+  -webkit-box-shadow: 5px 0px 16px -5px rgba(0, 0, 0, 0.78);
+  box-shadow: 5px 0px 16px -5px rgba(0, 0, 0, 0.78);
 }
 main {
   padding-top: 80px;

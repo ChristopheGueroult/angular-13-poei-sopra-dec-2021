@@ -39,12 +39,12 @@ export class HeaderComponent implements OnInit {
         'rgb(255, 255, 255)'
       );
       document.documentElement.style.setProperty(
-        '--app-main-bg-color',
-        'rgb(230, 230, 230)'
+        '--app-aside-bg-color',
+        'rgb(197, 197, 197)'
       );
       document.documentElement.style.setProperty(
-        '--app-aside-bg-color',
-        'rgb(124, 124, 124)'
+        '--app-main-bg-color',
+        'rgb(230, 230, 230)'
       );
       this.modeDay = !this.modeDay;
     }

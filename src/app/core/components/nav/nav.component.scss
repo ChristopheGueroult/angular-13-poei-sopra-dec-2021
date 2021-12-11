@@ -1,13 +1,13 @@
 a {
   border-top: 1px solid var(--app-line-color-lighter);
   border-bottom: 1px solid var(--app-line-color);
-  color: var(--app-light);
+  color: var(--app-dark);
   padding: 1em;
   transition: all 0.2s;
   &:hover,
   &:focus,
   &.active {
-    color: var(--app-dark);
+    color: var(--app-primary);
   }
   & > * {
     font-size: 25px;
