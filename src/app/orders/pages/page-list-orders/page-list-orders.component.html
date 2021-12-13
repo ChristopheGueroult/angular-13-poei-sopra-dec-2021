@@ -1,6 +1,6 @@
-<app-template-full-width [title]="title">
+<app-template-full-width [title]="title" *ngIf="collection">
 
-  <app-tab-light></app-tab-light>
+  <app-tab-light [headers]="headers" [collection]="collection"></app-tab-light>
   <app-btn-route class="ms-3" route="add" text="Add Order"></app-btn-route>
 
 </app-template-full-width>

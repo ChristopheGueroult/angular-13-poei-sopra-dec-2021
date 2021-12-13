@@ -14,3 +14,9 @@ Todo:
   ☐ créer un autre component btn btn-link que je peux utiliser sur toutes mes vues en chosissant le texte et le lien pour href
   ☐ créer un autre component btn btn-action que je peux uitliser sur toutes mes vues en choisissant le texte et l'action (pour l'action, pour l'instant, uniquement un console.log('btn clicked' dans le typescipt du bouton))
   ☐ créer un autre template de page (gabarit) avec 2 transclusions dans 2 block différents qui se mettent l'un sous l'autre et qui prennent toute la largeur du parent sur un mobile, et qui prenne la moitié de la largeur du parent pour se mettre cote à cote à partir des tablettes. En prenant exemple sur la capture d'écran fournie
+
+Todo :
+  ☐ enum client ou user enum ACTIVE et INACTIVE
+  ☐ interface et model pour client et user
+  ☐ model (class) client et user
+  ☐ service client et user

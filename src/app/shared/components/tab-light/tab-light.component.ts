@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Order } from 'src/app/core/models/order';
 
 @Component({
   selector: 'app-tab-light',
@@ -6,34 +7,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./tab-light.component.scss'],
 })
 export class TabLightComponent implements OnInit {
-  public headers!: string[];
-  public collection!: any[];
-  constructor() {}
-
+  @Input() headers!: string[];
+  @Input() collection!: Order[];
+  constructor() {
+    console.log(this.headers);
+    console.log(this.collection);
+  }
+  ngOnChanges(): void {
+    console.log(this.headers);
+    console.log(this.collection);
+  }
   ngOnInit(): void {
-    this.headers = [
-      'Client',
-      'Type',
-      'Description',
-      'Unit Price',
-      'Nb Days',
-      'Tva',
-      'Total (excl. Taxes)',
-      'Total (with Taxes)',
-      'State',
-    ];
-    this.collection = [
-      {
-        id: 1,
-        label: 'Formation Java',
-        adrEt: 450,
-        numberOfDays: 5,
-        tva: 20,
-        status: 'CONFIRMED',
-        type: 'Forfait',
-        notes: 'Test',
-        customerId: 1,
-      },
-    ];
+    console.log(this.headers);
+    console.log(this.collection);
   }
 }

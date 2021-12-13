@@ -12,6 +12,7 @@ import { UsersRoutingModule } from './users-routing.module';
     PageEditUserComponent,
     PageAddUserComponent,
   ],
+  providers: [],
   imports: [CommonModule, UsersRoutingModule, SharedModule],
 })
 export class UsersModule {}
