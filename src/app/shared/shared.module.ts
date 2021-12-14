@@ -8,10 +8,11 @@ import { TabLightComponent } from './components/tab-light/tab-light.component';
 import { BtnLinkComponent } from './components/btn-link/btn-link.component';
 import { BtnActionComponent } from './components/btn-action/btn-action.component';
 import { TotalPipe } from './pipes/total.pipe';
+import { StateDirective } from './directives/state.directive';
 
 @NgModule({
-  declarations: [TabLightComponent, BtnRouteComponent, BtnLinkComponent, BtnActionComponent, TotalPipe],
+  declarations: [TabLightComponent, BtnRouteComponent, BtnLinkComponent, BtnActionComponent, TotalPipe, StateDirective],
   imports: [CommonModule, RouterModule],
-  exports: [TabLightComponent, BtnRouteComponent, TemplatesModule, IconsModule, BtnLinkComponent, BtnActionComponent, TotalPipe],
+  exports: [TabLightComponent, BtnRouteComponent, TemplatesModule, IconsModule, BtnLinkComponent, BtnActionComponent, TotalPipe, StateDirective],
 })
 export class SharedModule {}
