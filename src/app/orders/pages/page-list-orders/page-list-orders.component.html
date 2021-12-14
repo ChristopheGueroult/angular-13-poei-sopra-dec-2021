@@ -1,6 +1,19 @@
 <app-template-full-width [title]="title" *ngIf="collection">
 
-  <app-tab-light [headers]="headers" [collection]="collection"></app-tab-light>
+  <app-tab-light [headers]="headers">
+    <tr *ngFor="let item of collection">
+      <td>{{ item.customerId }}</td>
+      <td>{{ item.type }}</td>
+      <td>{{ item.label }}</td>
+      <td>{{ item.adrEt }}</td>
+      <td>{{ item.numberOfDays }}</td>
+      <td>{{ item.tva }}</td>
+      <td>{{ item.adrEt | total: item.numberOfDays }}</td>
+      <td>{{ item.adrEt | total: item.numberOfDays: item.tva }}</td>
+      <td>{{ item.status }}</td>
+    </tr>
+  </app-tab-light>
+
   <app-btn-route class="ms-3" route="add" text="Add Order"></app-btn-route>
 
 </app-template-full-width>
