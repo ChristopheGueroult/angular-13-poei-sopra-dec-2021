@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { StateOrder } from '../enums/state-order';
 import { Order } from '../models/order';
 
@@ -12,8 +13,9 @@ export class OrdersService {
    * private collection
    */
   private collection$!: Observable<Order[]>;
+  private urlApi = environment.urlApi;
   constructor(private http: HttpClient) {
-    this.collection = this.http.get<Order[]>('http://localhost:8080/v1/orders');
+    this.collection = this.http.get<Order[]>(this.urlApi + 'v1/orders');
   }
 
   /**
@@ -43,10 +45,7 @@ export class OrdersService {
    * update item in collection
    */
   public update(item: Order): Observable<Order> {
-    return this.http.put<Order>(
-      `http://localhost:8080/v1/orders/${item.id}`,
-      item
-    );
+    return this.http.put<Order>(`${this.urlApi}v1/orders/${item.id}`, item);
   }
 
   /**
