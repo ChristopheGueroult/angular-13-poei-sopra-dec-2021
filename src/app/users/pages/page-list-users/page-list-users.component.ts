@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { StateUser } from 'src/app/core/enums/state-user';
+import { User } from 'src/app/core/models/user';
+import { UsersService } from 'src/app/core/services/users.service';
 
 @Component({
   selector: 'app-page-list-users',
@@ -7,9 +11,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PageListUsersComponent implements OnInit {
   public title: string;
-  constructor() {
-    this.title = 'List users';
+  public headers!: string[];
+  public collection$: Observable<User[]>;
+  public states = StateUser;
+  constructor(private usersService: UsersService) {
+    this.title = 'List orders';
+    this.collection$ = this.usersService.collection;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.headers = ['User Name', 'Mail', 'Rôles'];
+  }
+
+  public changeState(item: User, event: Event): void {
+    const target = event.target as HTMLSelectElement;
+    const state = target.value as StateUser;
+    this.usersService.changeState(item, state).subscribe((data) => {
+      Object.assign(item, data);
+    });
+  }
 }

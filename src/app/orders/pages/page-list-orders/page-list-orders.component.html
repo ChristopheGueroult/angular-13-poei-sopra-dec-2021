@@ -2,7 +2,7 @@
 
   <app-tab-light [headers]="headers">
     <tr *ngFor="let item of collection">
-      <td>{{ item.customerId }}</td>
+      <td>{{ item.customerCompany }}</td>
       <td>{{ item.type }}</td>
       <td>{{ item.label }}</td>
       <td>{{ item.adrEt | currency:'EUR' }}</td>

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { Client } from '../models/client';
 
 @Injectable({
@@ -11,10 +12,9 @@ export class ClientsService {
    * private collection
    */
   private collection$!: Observable<Client[]>;
+  private urlApi = environment.urlApi;
   constructor(private http: HttpClient) {
-    this.collection = this.http.get<Client[]>(
-      'http://localhost:8080/v1/customers'
-    );
+    this.collection = this.http.get<Client[]>(this.urlApi + 'v1/customers');
   }
 
   /**
@@ -34,10 +34,18 @@ export class ClientsService {
   /**
    * change state item
    */
+  public changeState(item: Client): Observable<Client> {
+    let obj = new Client(item);
+    obj.active = !obj.active;
+    return this.update(obj);
+  }
 
   /**
    * update item in collection
    */
+  public update(item: Client): Observable<Client> {
+    return this.http.put<Client>(`${this.urlApi}v1/customers/${item.id}`, item);
+  }
 
   /**
    * add item in collection

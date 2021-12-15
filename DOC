@@ -1,6 +1,12 @@
 ## REGES DE NOMMAGE
 
 noms en anglais uniquement pour les composants de l'application
+pour tous les components icons on ajoute le préfix icon
+pour tous les components tableaux on ajoute le préfix tab
+pour tous les components pages on ajoute le préfix page
+pour tous les components templates on ajoute le préfix template
+pour tous les components formulaire on ajoute le préfix form
+pour tous les transclusion on ajoute le préfix tr devant les noms de class
 
 ## CoreModule
 
@@ -25,8 +31,6 @@ ex : <ng-content select=".tr-header"></ng-content> et <some-element class="tr-he
 Un module icons spécifique pour tous les icons de notre appli.
 Préfix icon- pour tous les noms de webcomponents crées pour nos icons
 Dans les vues de l'appli on utilise que des instances de nos icons
-
-Un ptit mot doux de tonton Cricri
 
 ## Templates Module and Templates components
 

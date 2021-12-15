@@ -1,0 +1,20 @@
+.form-check-input:checked {
+  background-color: var(--app-primary);
+  outline: none;
+  border: none;
+  &:focus {
+    border-color: rgba(0, 0, 0, 0.2);
+    outline: none;
+    box-shadow: none;
+    background-image: url('data:image/svg+xml,<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="37" fill="white"/></svg>');
+  }
+}
+.form-check-input {
+  border-color: rgba(0, 0, 0, 0.2);
+}
+.form-check-input:focus {
+  border-color: rgba(0, 0, 0, 0.2);
+  outline: none;
+  box-shadow: none;
+  background-image: url('data:image/svg+xml,<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="37" fill="grey"/></svg>');
+}
