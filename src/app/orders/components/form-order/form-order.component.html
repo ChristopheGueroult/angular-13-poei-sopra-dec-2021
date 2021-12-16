@@ -1,27 +1,63 @@
-<form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
-
-  <label for="first-name">First Name: </label>
-  <input id="first-name" type="text" formControlName="firstName">
-
-  <label for="last-name">Last Name: </label>
-  <input id="last-name" type="text" formControlName="lastName">
-
-  <div formGroupName="address">
-    <h2>Address</h2>
-
-    <label for="street">Street: </label>
-    <input id="street" type="text" formControlName="street">
-
-    <label for="city">City: </label>
-    <input id="city" type="text" formControlName="city">
-
-    <label for="state">State: </label>
-    <input id="state" type="text" formControlName="state">
-
-    <label for="zip">Zip Code: </label>
-    <input id="zip" type="text" formControlName="zip">
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="mb-3">
+    <label for="client" class="form-label">Customer Name</label>
+    <input formControlName="customerCompany" type="text" class="form-control" id="client">
+    <div *ngIf="form.controls['customerCompany'].invalid && (form.controls['customerCompany'].touched || errorMsg)"
+      class="alert alert-danger">invalid field</div>
   </div>
 
-  <button [disabled]="profileForm.invalid">valider</button>
+  <div class="mb-3">
+    <label for="Description" class="form-label">Description</label>
+    <input formControlName="label" type="text" class="form-control" id="Description">
+    <div *ngIf="form.controls['label'].invalid && (form.controls['label'].touched || errorMsg)"
+      class="alert alert-danger">invalid
+      field</div>
+  </div>
+
+  <div class="mb-3">
+    <label for="Type" class="form-label">Type</label>
+    <input formControlName="type" type="text" class="form-control" id="Type">
+    <div *ngIf="form.controls['type'].invalid && (form.controls['type'].touched || errorMsg)"
+      class="alert alert-danger">
+      invalid field
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label for="tjm" class="form-label">Unit Price</label>
+    <input formControlName="adrEt" type="number" class="form-control" id="tjm">
+    <div *ngIf="form.controls['adrEt'].invalid && (form.controls['adrEt'].touched || errorMsg)"
+      class="alert alert-danger">invalid
+      field</div>
+  </div>
+
+  <div class="mb-3">
+    <label for="nbdays" class="form-label">Nb Days</label>
+    <input formControlName="numberOfDays" type="number" class="form-control" id="nbdays">
+    <div *ngIf="form.controls['numberOfDays'].invalid && (form.controls['numberOfDays'].touched || errorMsg)"
+      class="alert alert-danger">invalid field</div>
+  </div>
+
+  <div class="mb-3">
+    <label for="tva" class="form-label">Tva</label>
+    <input formControlName="tva" type="number" class="form-control" id="tva">
+    <div *ngIf="form.controls['tva'].invalid && (form.controls['tva'].touched || errorMsg)" class="alert alert-danger">
+      invalid field
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label for="status" class="form-label">State</label>
+    <select formControlName="status" class="form-control" id="status">
+      <option *ngFor="let state of states" [ngValue]="state">{{ state }}</option>
+    </select>
+  </div>
+
+  <div class="mb-3">
+    <label for="Notes" class="form-label">Notes</label>
+    <textarea formControlName="notes" class="form-control" id="Notes"></textarea>
+  </div>
+
+  <button type="submit" class="btn btn-primary">Submit</button>
 
 </form>

@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { StateOrder } from 'src/app/core/enums/state-order';
+import { Order } from 'src/app/core/models/order';
 
 @Component({
   selector: 'app-form-order',
@@ -7,25 +9,40 @@ import { FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./form-order.component.scss'],
 })
 export class FormOrderComponent implements OnInit {
-  profileForm = this.fb.group({
-    firstName: ['', Validators.required],
-    lastName: ['', [Validators.required, Validators.minLength(2)]],
-    address: this.fb.group({
-      street: [''],
-      city: ['Antibes'],
-      state: [''],
-      zip: [''],
-    }),
-  });
-  constructor(private fb: FormBuilder) {}
+  public form!: FormGroup;
+  public states = Object.values(StateOrder);
+  public errorMsg = false;
+  private valid!: boolean;
+  @Input() init!: Order;
+  constructor(private fb: FormBuilder) {
+    this.init = new Order();
+  }
 
   ngOnInit(): void {
-    console.log(this.profileForm.valid); // false
-    console.log(this.profileForm.controls['firstName'].valid); // false
+    this.form = this.fb.group({
+      adrEt: [this.init.adrEt, Validators.required],
+      customerCompany: [this.init.customerCompany, Validators.required],
+      id: [this.init.id],
+      label: [this.init.label, Validators.required],
+      notes: [this.init.notes],
+      numberOfDays: [this.init.numberOfDays, Validators.required],
+      status: [this.init.status],
+      tva: [this.init.tva, Validators.required],
+      type: [this.init.type, Validators.required],
+    });
   }
-  onSubmit() {
-    // si firstName contient au moins une lettre
-    console.log(this.profileForm.valid); // true
-    console.log(this.profileForm.controls['firstName'].valid); // true
+  public onSubmit(): void {
+    this.valid = true;
+    for (const field in this.form.controls) {
+      const control = this.form.get(field);
+      // console.log(control?.valid);
+      if (control?.invalid) {
+        this.errorMsg = true;
+        this.valid = false;
+      }
+    }
+    if (this.valid) {
+      console.log(this.form.value);
+    }
   }
 }
