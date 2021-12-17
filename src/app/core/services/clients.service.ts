@@ -36,6 +36,19 @@ export class ClientsService {
   }
 
   /**
+   * get clientid by clientName
+   */
+  public getClientByName(name: string): number {
+    let id = 0;
+    this.collection.value.forEach((client) => {
+      if (client.company === name) {
+        id = client.id;
+      }
+    });
+    return id;
+  }
+
+  /**
    * change state item
    */
   public changeState(item: Client): Observable<Client> {

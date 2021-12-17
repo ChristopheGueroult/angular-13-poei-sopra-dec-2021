@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { StateOrder } from 'src/app/core/enums/state-order';
 import { Order } from 'src/app/core/models/order';
@@ -14,13 +15,14 @@ export class PageListOrdersComponent implements OnInit {
   public headers!: string[];
   public collection$: Observable<Order[]>;
   public states = Object.values(StateOrder);
-  constructor(private ordersService: OrdersService) {
+  constructor(private ordersService: OrdersService, private router: Router) {
     this.title = 'List orders';
     this.collection$ = this.ordersService.collection;
   }
 
   ngOnInit(): void {
     this.headers = [
+      'Action',
       'Client',
       'Type',
       'Description',
@@ -31,6 +33,10 @@ export class PageListOrdersComponent implements OnInit {
       'Total (with Taxes)',
       'State',
     ];
+  }
+
+  public goToEdit(id: number): void {
+    this.router.navigate(['orders', 'edit', id]);
   }
 
   public changeState(item: Order, event: Event): void {

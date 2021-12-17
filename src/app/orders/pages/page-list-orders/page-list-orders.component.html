@@ -2,6 +2,9 @@
 
   <app-tab-light [headers]="headers">
     <tr *ngFor="let item of collection">
+      <td>
+        <app-icon-edit (click)="goToEdit(item.id)"></app-icon-edit>
+      </td>
       <td>{{ item.customerCompany }}</td>
       <td>{{ item.type }}</td>
       <td>{{ item.label }}</td>

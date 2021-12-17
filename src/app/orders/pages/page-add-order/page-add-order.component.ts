@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Client } from 'src/app/core/models/client';
 import { Order } from 'src/app/core/models/order';
+import { ClientsService } from 'src/app/core/services/clients.service';
 import { OrdersService } from 'src/app/core/services/orders.service';
 
 @Component({
@@ -10,13 +10,21 @@ import { OrdersService } from 'src/app/core/services/orders.service';
   styleUrls: ['./page-add-order.component.scss'],
 })
 export class PageAddOrderComponent implements OnInit {
-  constructor(private ordersService: OrdersService, private router: Router) {}
+  constructor(
+    private ordersService: OrdersService,
+    private router: Router,
+    private clientsService: ClientsService
+  ) {}
 
   ngOnInit(): void {}
-  public action(item: { order: Order; client: Client }): void {
-    item.order.customerId = item.client.id;
-    this.ordersService.add(item.order).subscribe((data) => {
-      this.router.navigate(['orders']);
-    });
+  public action(item: Order): void {
+    item.customerId = this.clientsService.getClientByName(item.customerCompany);
+    if (item.customerId != 0) {
+      this.ordersService.add(item).subscribe((data) => {
+        this.router.navigate(['orders']);
+      });
+    } else {
+      console.log('error');
+    }
   }
 }
