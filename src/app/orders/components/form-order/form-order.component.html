@@ -1,7 +1,11 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
   <div class="mb-3">
     <label for="client" class="form-label">Customer Name</label>
-    <input formControlName="customerCompany" type="text" class="form-control" id="client">
+    <input formControlName="customerCompany" class="form-control" list="datalistOptions" id="client" placeholder="">
+    <datalist id="datalistOptions" *ngIf="clients$ | async as clients">
+      <option *ngFor="let item of clients" [value]="item.company">
+    </datalist>
+
     <div *ngIf="form.controls['customerCompany'].invalid && (form.controls['customerCompany'].touched || errorMsg)"
       class="alert alert-danger">invalid field</div>
   </div>

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Client } from '../models/client';
 
@@ -11,24 +11,28 @@ export class ClientsService {
   /**
    * private collection
    */
-  private collection$!: Observable<Client[]>;
+  private collection$: BehaviorSubject<Client[]> = new BehaviorSubject([
+    new Client(),
+  ]);
   private urlApi = environment.urlApi;
+
   constructor(private http: HttpClient) {
-    this.collection = this.http.get<Client[]>(this.urlApi + 'v1/customers');
+    this.refreshCollection();
   }
 
+  /**
+   * refresh collection
+   */
+  public refreshCollection(): void {
+    this.http.get<Client[]>(this.urlApi + 'v1/customers').subscribe((data) => {
+      this.collection$.next(data);
+    });
+  }
   /**
    * get collection
    */
-  public get collection(): Observable<Client[]> {
+  public get collection(): BehaviorSubject<Client[]> {
     return this.collection$;
-  }
-
-  /**
-   * set collection
-   */
-  public set collection(obj: Observable<Client[]>) {
-    this.collection$ = obj;
   }
 
   /**

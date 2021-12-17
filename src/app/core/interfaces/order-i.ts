@@ -2,6 +2,7 @@ import { StateOrder } from '../enums/state-order';
 
 export interface OrderI {
   adrEt: number;
+  customerId: number;
   customerCompany: string;
   id: number;
   label: string;

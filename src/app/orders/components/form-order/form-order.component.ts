@@ -1,25 +1,41 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Subject, Subscription } from 'rxjs';
 import { StateOrder } from 'src/app/core/enums/state-order';
+import { Client } from 'src/app/core/models/client';
 import { Order } from 'src/app/core/models/order';
+import { ClientsService } from 'src/app/core/services/clients.service';
 
 @Component({
   selector: 'app-form-order',
   templateUrl: './form-order.component.html',
   styleUrls: ['./form-order.component.scss'],
 })
-export class FormOrderComponent implements OnInit {
+export class FormOrderComponent implements OnInit, OnDestroy {
   public form!: FormGroup;
   public states = Object.values(StateOrder);
   public errorMsg = false;
   private valid!: boolean;
+  public clients$: Subject<Client[]>;
+  private sub!: Subscription;
   @Input() init!: Order;
-  constructor(private fb: FormBuilder) {
+  @Output() submited: EventEmitter<{ order: Order; client: Client }> =
+    new EventEmitter<{ order: Order; client: Client }>();
+  constructor(private fb: FormBuilder, private clientsService: ClientsService) {
     this.init = new Order();
+    this.clients$ = this.clientsService.collection;
   }
 
   ngOnInit(): void {
     this.form = this.fb.group({
+      customerId: [this.init.customerId],
       adrEt: [this.init.adrEt, Validators.required],
       customerCompany: [this.init.customerCompany, Validators.required],
       id: [this.init.id],
@@ -42,7 +58,18 @@ export class FormOrderComponent implements OnInit {
       }
     }
     if (this.valid) {
-      console.log(this.form.value);
+      this.clientsService.refreshCollection();
+      this.sub = this.clients$.subscribe((clients) => {
+        clients.forEach((client) => {
+          if (this.form.controls['customerCompany'].value === client.company) {
+            this.submited.emit({ order: this.form.value, client: client });
+          }
+        });
+      });
     }
+  }
+
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

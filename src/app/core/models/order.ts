@@ -3,6 +3,7 @@ import { OrderI } from '../interfaces/order-i';
 
 export class Order implements OrderI {
   adrEt = 1200;
+  customerId!: number;
   customerCompany!: string;
   id!: number;
   label!: string;
