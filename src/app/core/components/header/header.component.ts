@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Subject } from 'rxjs';
+import { User } from '../../models/user';
+import { AuthService } from '../../services/auth.service';
+import { UsersService } from '../../services/users.service';
 
 @Component({
   selector: 'app-header',
@@ -11,7 +15,13 @@ export class HeaderComponent implements OnInit {
    * default is true whit day mode
    */
   public modeDay = true;
-  constructor() {}
+  public user$!: Subject<User | null>;
+  constructor(
+    private usersService: UsersService,
+    private authService: AuthService
+  ) {
+    this.user$ = this.usersService.user$;
+  }
 
   ngOnInit(): void {}
   /**
@@ -48,5 +58,9 @@ export class HeaderComponent implements OnInit {
       );
       this.modeDay = !this.modeDay;
     }
+  }
+
+  public signOut(): void {
+    this.authService.signOut();
   }
 }

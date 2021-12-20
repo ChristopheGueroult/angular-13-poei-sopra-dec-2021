@@ -5,7 +5,6 @@ export class User implements UserI {
   grants = StateUser.ROLE_ADMIN;
   id!: number;
   mail!: string;
-  password!: string;
   username!: string;
   constructor(obj?: Partial<User>) {
     if (obj) {

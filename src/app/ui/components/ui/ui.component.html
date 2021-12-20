@@ -1,7 +1,7 @@
 <div class="d-flex flex-column ui">
   <header class="d-flex align-items-center">
     <div>
-      <span (click)="toggle()">
+      <span (click)="toggle()" *ngIf="user">
         <div *ngIf="!open; then thenBlock else elseBlock"></div>
         <ng-template #thenBlock>
           <ng-content select=".tr-open"></ng-content>
@@ -16,7 +16,7 @@
       <ng-content select=".tr-header"></ng-content>
     </div>
   </header>
-  <main [ngClass]="{'close-nav': !open}" class="flex-grow-1 d-flex">
+  <main [ngClass]="{'close-nav': !open || !user}" class="flex-grow-1 d-flex">
     <aside class="position-fixed">
       <nav>
 

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from 'src/app/core/models/user';
+import { UsersService } from 'src/app/core/services/users.service';
 /**
  * @description
  * this component is user interface. we did this component to keep
@@ -15,8 +17,12 @@ export class UiComponent implements OnInit {
    * we want nav open when we arrived on the app
    */
   public open: boolean;
-  constructor() {
+  public user!: User | null;
+  constructor(private usersService: UsersService) {
     this.open = true;
+    this.usersService.user$.subscribe((data) => {
+      this.user = data;
+    });
   }
 
   ngOnInit(): void {}

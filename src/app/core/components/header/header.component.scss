@@ -1,0 +1,14 @@
+.sign-out {
+  background: var(--app-light);
+  display: inline-block;
+  border-radius: 19px;
+  border: 1px solid var(--app-primary);
+  padding: 0px 10px;
+  margin: 0 5px;
+  cursor: pointer;
+  transition: all 0.2s;
+  &:hover {
+    background: var(--app-primary);
+    color: var(--app-light);
+  }
+}

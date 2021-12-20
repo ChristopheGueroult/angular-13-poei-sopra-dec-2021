@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { User } from '../models/user';
@@ -12,7 +13,11 @@ export class AuthService {
   public token$: BehaviorSubject<string | null> = new BehaviorSubject<
     string | null
   >('');
-  constructor(private http: HttpClient, private usersService: UsersService) {}
+  constructor(
+    private http: HttpClient,
+    private usersService: UsersService,
+    private router: Router
+  ) {}
   /**
    * get password and username to sign in
    */
@@ -34,6 +39,7 @@ export class AuthService {
           localStorage.setItem('token', JSON.stringify(data.token));
           this.token$.next(data.token);
           this.usersService.user$.next(new User(user));
+          this.router.navigate(['orders']);
         })
       );
   }
@@ -46,5 +52,6 @@ export class AuthService {
     localStorage.removeItem('token');
     this.token$.next(null);
     this.usersService.user$.next(null);
+    this.router.navigate(['sign-in']);
   }
 }
