@@ -13,6 +13,7 @@ import { OrdersService } from 'src/app/core/services/orders.service';
 export class PageListOrdersComponent implements OnInit {
   public title: string;
   public headers!: string[];
+  public filters!: string[];
   public collection$: Subject<Order[]>;
   public states = Object.values(StateOrder);
   constructor(private ordersService: OrdersService, private router: Router) {
@@ -33,6 +34,7 @@ export class PageListOrdersComponent implements OnInit {
       'Total (with Taxes)',
       'State',
     ];
+    this.filters = ['All', ...this.states];
   }
 
   public goToEdit(id: number): void {
@@ -53,5 +55,8 @@ export class PageListOrdersComponent implements OnInit {
 
   public selectItems(expression: string): void {
     this.ordersService.getItemsBySearch(expression);
+  }
+  public filterItems(expression: string): void {
+    this.ordersService.getItemsByFilter(expression);
   }
 }

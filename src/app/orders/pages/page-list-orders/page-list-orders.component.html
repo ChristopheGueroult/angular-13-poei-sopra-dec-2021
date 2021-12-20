@@ -2,7 +2,7 @@
   <div class="tr-head">
     <div class="d-flex flex-wrap align-items-center justify-content-between">
       <app-form-search (expression)="selectItems($event)"></app-form-search>
-      <span>all | confirmed | options | canceled</span>
+      <app-filter [filters]="filters" (filter)="filterItems($event)"></app-filter>
       <app-btn-route class="ms-3" route="add" text="Add Order">
         <app-icon-plus-circle></app-icon-plus-circle>
       </app-btn-route>

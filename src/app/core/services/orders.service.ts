@@ -60,6 +60,32 @@ export class OrdersService {
       });
   }
 
+  public getItemsByFilter(expression: string): void {
+    const lowerExpression = expression.toUpperCase();
+    this.http
+      .get<Order[]>(this.urlApi + 'v1/orders')
+      .pipe(
+        tap((data) => {
+          console.log(
+            data.filter((item) => item.status.indexOf(lowerExpression) !== -1)
+          );
+        }),
+        map((data) => {
+          if (lowerExpression === 'ALL') {
+            return data;
+          } else {
+            return data.filter(
+              (item) =>
+                item.status.toUpperCase().indexOf(lowerExpression) !== -1
+            );
+          }
+        })
+      )
+      .subscribe((data) => {
+        this.collection$.next(data);
+      });
+  }
+
   /**
    * change state item
    */

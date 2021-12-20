@@ -11,6 +11,7 @@ import { FormSearchComponent } from './components/form-search/form-search.compon
 import { TabLightComponent } from './components/tab-light/tab-light.component';
 import { StateDirective } from './directives/state.directive';
 import { TotalPipe } from './pipes/total.pipe';
+import { FilterComponent } from './components/filter/filter.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { TotalPipe } from './pipes/total.pipe';
     TotalPipe,
     StateDirective,
     FormSearchComponent,
+    FilterComponent,
   ],
   imports: [CommonModule, RouterModule, ReactiveFormsModule, IconsModule],
   exports: [
@@ -33,6 +35,7 @@ import { TotalPipe } from './pipes/total.pipe';
     TotalPipe,
     StateDirective,
     FormSearchComponent,
+    FilterComponent,
   ],
 })
 export class SharedModule {}
