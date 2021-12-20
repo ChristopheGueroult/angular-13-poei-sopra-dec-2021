@@ -10,3 +10,7 @@
 .state-paid {
   background: var(--app-primary);
 }
+
+td:first-child {
+  min-width: 70px;
+}

@@ -43,6 +43,9 @@ main .shadow {
   width: 100%;
   background: rgba(0, 0, 0, 0.5);
 }
+.content {
+  overflow-x: auto;
+}
 
 footer,
 header {

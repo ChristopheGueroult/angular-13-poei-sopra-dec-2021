@@ -1,0 +1,23 @@
+<form [formGroup]="form" (ngSubmit)="register()">
+
+
+  <div class="mb-3">
+    <label for="UserName" class="form-label">UserName</label>
+    <input formControlName="userName" type="text" class="form-control" id="UserName">
+  </div>
+
+  <div class="mb-3">
+    <label for="Password" class="form-label">Password</label>
+    <div class="input-group">
+      <input formControlName="password" [type]="typeInput" class="form-control" id="Password">
+      <span class="input-group-text">
+        <app-icon-eye *ngIf="typeInput === 'password' " (click)="toggleType()"></app-icon-eye>
+        <app-icon-eye-slash *ngIf="typeInput === 'text' " (click)="toggleType()"></app-icon-eye-slash>
+      </span>
+    </div>
+  </div>
+
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+
+</form>

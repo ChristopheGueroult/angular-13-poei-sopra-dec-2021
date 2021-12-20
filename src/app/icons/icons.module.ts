@@ -10,6 +10,8 @@ import { IconListItemsComponent } from './components/icon-list-items/icon-list-i
 import { IconListUsersComponent } from './components/icon-list-users/icon-list-users.component';
 import { IconNavComponent } from './components/icon-nav/icon-nav.component';
 import { IconNightModeComponent } from './components/icon-night-mode/icon-night-mode.component';
+import { IconEyeComponent } from './components/icon-eye/icon-eye.component';
+import { IconEyeSlashComponent } from './components/icon-eye-slash/icon-eye-slash.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,8 @@ import { IconNightModeComponent } from './components/icon-night-mode/icon-night-
     IconListClientsComponent,
     IconDayModeComponent,
     IconNightModeComponent,
+    IconEyeComponent,
+    IconEyeSlashComponent,
   ],
   imports: [CommonModule, FontAwesomeModule],
   exports: [
@@ -34,6 +38,8 @@ import { IconNightModeComponent } from './components/icon-night-mode/icon-night-
     IconListClientsComponent,
     IconDayModeComponent,
     IconNightModeComponent,
+    IconEyeComponent,
+    IconEyeSlashComponent,
   ],
 })
 export class IconsModule {}
