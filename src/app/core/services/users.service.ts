@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, tap } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { StateUser } from '../enums/state-user';
 import { User } from '../models/user';
@@ -9,6 +9,9 @@ import { User } from '../models/user';
   providedIn: 'root',
 })
 export class UsersService {
+  public user$: BehaviorSubject<User | null> = new BehaviorSubject<User | null>(
+    null
+  );
   /**
    * private collection
    */

@@ -6,7 +6,6 @@ export class User implements UserI {
   id!: number;
   mail!: string;
   password!: string;
-  token!: string;
   username!: string;
   constructor(obj?: Partial<User>) {
     if (obj) {

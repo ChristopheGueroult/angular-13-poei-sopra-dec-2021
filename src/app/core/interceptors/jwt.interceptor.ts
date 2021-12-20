@@ -6,10 +6,11 @@ import {
   HttpInterceptor,
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { AuthService } from '../services/auth.service';
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
-  constructor() {}
+  constructor(private authService: AuthService) {}
 
   intercept(
     request: HttpRequest<unknown>,
@@ -21,6 +22,13 @@ export class JwtInterceptor implements HttpInterceptor {
         'Access-Control-Allow-Methods': ['GET', 'POST', 'DELETE'],
       },
     });
+    if (this.authService.token$.value) {
+      request = request.clone({
+        setHeaders: {
+          Authorization: `Bearer ${this.authService.token$.value}`,
+        },
+      });
+    }
     return next.handle(request);
   }
 }

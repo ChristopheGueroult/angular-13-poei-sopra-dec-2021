@@ -3,6 +3,5 @@ export interface UserI {
   id: number;
   mail: string;
   password: string;
-  token: string;
   username: string;
 }
