@@ -3,6 +3,7 @@ a {
   border-bottom: 1px solid var(--app-line-color);
   color: var(--app-dark);
   padding: 1em;
+  min-height: 100px;
   transition: all 0.2s;
   &:hover,
   &:focus,
@@ -11,8 +12,6 @@ a {
   }
   & > * {
     font-size: 25px;
-    min-width: 40px;
-    display: inline-block;
   }
   span {
     margin-left: 5px;
@@ -21,4 +20,7 @@ a {
 }
 li:last-child a {
   border-bottom: none;
+}
+ul {
+  overflow-y: auto;
 }

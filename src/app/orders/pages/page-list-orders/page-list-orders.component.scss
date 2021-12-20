@@ -14,3 +14,10 @@
 td:first-child {
   min-width: 70px;
 }
+
+.tr-head > div > * {
+  margin-right: 10px;
+  &:last-child {
+    margin-right: 0;
+  }
+}

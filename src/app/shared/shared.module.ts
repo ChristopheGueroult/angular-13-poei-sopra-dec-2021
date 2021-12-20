@@ -1,18 +1,38 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { IconsModule } from '../icons/icons.module';
 import { TemplatesModule } from '../templates/templates.module';
-import { BtnRouteComponent } from './components/btn-route/btn-route.component';
-import { TabLightComponent } from './components/tab-light/tab-light.component';
-import { BtnLinkComponent } from './components/btn-link/btn-link.component';
 import { BtnActionComponent } from './components/btn-action/btn-action.component';
-import { TotalPipe } from './pipes/total.pipe';
+import { BtnLinkComponent } from './components/btn-link/btn-link.component';
+import { BtnRouteComponent } from './components/btn-route/btn-route.component';
+import { FormSearchComponent } from './components/form-search/form-search.component';
+import { TabLightComponent } from './components/tab-light/tab-light.component';
 import { StateDirective } from './directives/state.directive';
+import { TotalPipe } from './pipes/total.pipe';
 
 @NgModule({
-  declarations: [TabLightComponent, BtnRouteComponent, BtnLinkComponent, BtnActionComponent, TotalPipe, StateDirective],
-  imports: [CommonModule, RouterModule],
-  exports: [TabLightComponent, BtnRouteComponent, TemplatesModule, IconsModule, BtnLinkComponent, BtnActionComponent, TotalPipe, StateDirective],
+  declarations: [
+    TabLightComponent,
+    BtnRouteComponent,
+    BtnLinkComponent,
+    BtnActionComponent,
+    TotalPipe,
+    StateDirective,
+    FormSearchComponent,
+  ],
+  imports: [CommonModule, RouterModule, ReactiveFormsModule, IconsModule],
+  exports: [
+    TabLightComponent,
+    BtnRouteComponent,
+    TemplatesModule,
+    IconsModule,
+    BtnLinkComponent,
+    BtnActionComponent,
+    TotalPipe,
+    StateDirective,
+    FormSearchComponent,
+  ],
 })
 export class SharedModule {}

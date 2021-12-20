@@ -20,7 +20,7 @@ header {
   height: 100vh;
 }
 nav {
-  width: 250px;
+  width: 105px;
   transition: all 0.1s;
 }
 .close-nav nav {
@@ -28,7 +28,7 @@ nav {
   overflow: hidden;
 }
 aside {
-  background: var(--app-aside-bg-color);
+  background: var(--app-light);
   height: 100%;
   z-index: 1;
   -webkit-box-shadow: 5px 0px 16px -5px rgba(0, 0, 0, 0.78);
@@ -59,7 +59,7 @@ main > div {
     display: none;
   }
   .content {
-    margin-left: 250px;
+    margin-left: 105px;
   }
   .close-nav .content {
     margin-left: 0;

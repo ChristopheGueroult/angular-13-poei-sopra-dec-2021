@@ -12,6 +12,7 @@ import { IconNavComponent } from './components/icon-nav/icon-nav.component';
 import { IconNightModeComponent } from './components/icon-night-mode/icon-night-mode.component';
 import { IconEyeComponent } from './components/icon-eye/icon-eye.component';
 import { IconEyeSlashComponent } from './components/icon-eye-slash/icon-eye-slash.component';
+import { IconPlusCircleComponent } from './components/icon-plus-circle/icon-plus-circle.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { IconEyeSlashComponent } from './components/icon-eye-slash/icon-eye-slas
     IconNightModeComponent,
     IconEyeComponent,
     IconEyeSlashComponent,
+    IconPlusCircleComponent,
   ],
   imports: [CommonModule, FontAwesomeModule],
   exports: [
@@ -40,6 +42,7 @@ import { IconEyeSlashComponent } from './components/icon-eye-slash/icon-eye-slas
     IconNightModeComponent,
     IconEyeComponent,
     IconEyeSlashComponent,
+    IconPlusCircleComponent,
   ],
 })
 export class IconsModule {}

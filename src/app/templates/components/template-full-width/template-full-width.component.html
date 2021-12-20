@@ -1,6 +1,7 @@
 <div class="bandeau">
   <h1>{{ title }}</h1>
+  <ng-content select=".tr-head"></ng-content>
 </div>
 <div>
-  <ng-content></ng-content>
+  <ng-content select=".tr-body"></ng-content>
 </div>

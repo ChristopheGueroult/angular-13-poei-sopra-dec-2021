@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { BehaviorSubject, map, Observable, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { StateOrder } from '../enums/state-order';
 import { Order } from '../models/order';
@@ -34,6 +34,30 @@ export class OrdersService {
     this.http.get<Order[]>(this.urlApi + 'v1/orders').subscribe((data) => {
       this.collection$.next(data);
     });
+  }
+
+  public getItemsBySearch(expression: string): void {
+    const lowerExpression = expression.toLowerCase();
+    this.http
+      .get<Order[]>(this.urlApi + 'v1/orders')
+      .pipe(
+        tap((data) => {
+          console.log(
+            data.filter(
+              (item) => item.customerCompany.indexOf(lowerExpression) !== -1
+            )
+          );
+        }),
+        map((data) => {
+          return data.filter(
+            (item) =>
+              item.customerCompany.toLowerCase().indexOf(lowerExpression) !== -1
+          );
+        })
+      )
+      .subscribe((data) => {
+        this.collection$.next(data);
+      });
   }
 
   /**

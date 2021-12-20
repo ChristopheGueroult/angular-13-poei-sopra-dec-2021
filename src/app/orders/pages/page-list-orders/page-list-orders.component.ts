@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { StateOrder } from 'src/app/core/enums/state-order';
 import { Order } from 'src/app/core/models/order';
 import { OrdersService } from 'src/app/core/services/orders.service';
@@ -49,5 +49,9 @@ export class PageListOrdersComponent implements OnInit {
     this.ordersService.changeState(item, state).subscribe((data) => {
       Object.assign(item, data);
     });
+  }
+
+  public selectItems(expression: string): void {
+    this.ordersService.getItemsBySearch(expression);
   }
 }

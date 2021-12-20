@@ -1,9 +1,11 @@
 .bandeau {
   padding: 15px;
   border-bottom: 1px solid var(--app-aside-bg-color);
+  min-height: 100px;
   h1 {
     font-size: var(--app-h1-fs);
     color: var(--app-primary);
     margin: 0;
+    margin-bottom: 5px;
   }
 }

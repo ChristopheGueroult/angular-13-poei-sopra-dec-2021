@@ -5,4 +5,11 @@ a {
     background: var(--app-primary-dark);
     color: var(--app-light);
   }
+  span {
+    display: inline-block;
+    margin-right: 5px;
+  }
+  &.btn-sm {
+    border-radius: 1em;
+  }
 }
