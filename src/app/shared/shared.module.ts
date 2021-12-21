@@ -7,11 +7,11 @@ import { TemplatesModule } from '../templates/templates.module';
 import { BtnActionComponent } from './components/btn-action/btn-action.component';
 import { BtnLinkComponent } from './components/btn-link/btn-link.component';
 import { BtnRouteComponent } from './components/btn-route/btn-route.component';
+import { FilterComponent } from './components/filter/filter.component';
 import { FormSearchComponent } from './components/form-search/form-search.component';
 import { TabLightComponent } from './components/tab-light/tab-light.component';
 import { StateDirective } from './directives/state.directive';
 import { TotalPipe } from './pipes/total.pipe';
-import { FilterComponent } from './components/filter/filter.component';
 
 @NgModule({
   declarations: [

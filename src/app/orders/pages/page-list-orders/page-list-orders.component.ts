@@ -16,6 +16,7 @@ export class PageListOrdersComponent implements OnInit {
   public filters!: string[];
   public collection$: Subject<Order[]>;
   public states = Object.values(StateOrder);
+  stateClicked = false;
   constructor(private ordersService: OrdersService, private router: Router) {
     this.title = 'List orders';
     this.collection$ = this.ordersService.collection;
@@ -25,8 +26,8 @@ export class PageListOrdersComponent implements OnInit {
     this.headers = [
       'Action',
       'Client',
-      'Type',
       'Description',
+      'Type',
       'Unit Price',
       'Nb Days',
       'Tva',
@@ -58,5 +59,9 @@ export class PageListOrdersComponent implements OnInit {
   }
   public filterItems(expression: string): void {
     this.ordersService.getItemsByFilter(expression);
+  }
+
+  test() {
+    this.stateClicked = true;
   }
 }
