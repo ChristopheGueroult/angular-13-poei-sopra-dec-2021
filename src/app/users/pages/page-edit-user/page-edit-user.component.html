@@ -1,1 +1,5 @@
-<p>page-edit-user works!</p>
+<app-template-container title="Edit User">
+
+  <app-form-user *ngIf="item$ | async as item" [init]="item" (submited)="action($event)"></app-form-user>
+
+</app-template-container>

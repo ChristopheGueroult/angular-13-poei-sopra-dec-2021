@@ -7,7 +7,7 @@ import { PageListUsersComponent } from './pages/page-list-users/page-list-users.
 const routes: Routes = [
   { path: '', component: PageListUsersComponent },
   { path: 'add', component: PageAddUserComponent },
-  { path: 'edit', component: PageEditUserComponent },
+  { path: 'edit/:id', component: PageEditUserComponent },
 ];
 
 @NgModule({

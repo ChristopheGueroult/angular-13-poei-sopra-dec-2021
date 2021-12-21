@@ -46,7 +46,9 @@ export class UsersService {
    * update item in collection
    */
   public update(item: User): Observable<User> {
-    return this.http.put<User>(`${this.urlApi}v1/users/${item.id}`, item);
+    return this.http
+      .put<User>(`${this.urlApi}v1/users/${item.id}`, item)
+      .pipe(tap(() => this.refreshCollection()));
   }
 
   /**
@@ -72,6 +74,9 @@ export class UsersService {
   /**
    * get item by id from collection
    */
+  public getItemById(id: number): Observable<User> {
+    return this.http.get<User>(`${this.urlApi}v1/users/${id}`);
+  }
 
   public getItemsBySearch(expression: string): void {
     const lowerExpression = expression.toLowerCase();
