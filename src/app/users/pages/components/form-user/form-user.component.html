@@ -1,0 +1,26 @@
+<form [formGroup]="form" (ngSubmit)="register()">
+  <div class="mb-3">
+    <label for="username" class="form-label">User Name</label>
+    <input formControlName="username" type="text" class="form-control" id="username">
+    <div *ngIf="form.controls['username'].invalid && (form.controls['username'].touched || errorMsg)"
+      class="alert alert-danger">invalid field</div>
+  </div>
+
+  <div class="mb-3">
+    <label for="mail" class="form-label">Email</label>
+    <input formControlName="mail" type="text" class="form-control" id="mail">
+    <div *ngIf="form.controls['mail'].invalid && (form.controls['mail'].touched || errorMsg)"
+      class="alert alert-danger">invalid
+      field</div>
+  </div>
+
+  <div class="mb-3">
+    <label for="grant" class="form-label">Grant</label>
+    <select formControlName="grants" class="form-control" id="grant">
+      <option *ngFor="let state of states | keyvalue" [ngValue]="state.key">{{ state.value }}</option>
+    </select>
+  </div>
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+
+</form>

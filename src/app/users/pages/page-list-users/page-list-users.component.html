@@ -4,7 +4,7 @@
     <div class="d-flex flex-wrap align-items-center justify-content-between">
       <app-form-search (expression)="selectItems($event)"></app-form-search>
       <app-filter [filters]="filters" (filter)="filterItems($event)"></app-filter>
-      <app-btn-route class="ms-3" route="add" text="Add Client">
+      <app-btn-route class="ms-3" route="add" text="Add User">
         <app-icon-plus-circle></app-icon-plus-circle>
       </app-btn-route>
     </div>
@@ -12,6 +12,10 @@
 
   <app-tab-light [headers]="headers" class="tr-body">
     <tr *ngFor="let item of collection">
+      <td>
+        <app-icon-edit (click)="goToEdit(item.id)"></app-icon-edit>
+        <app-icon-delete (click)="deleteItem(item.id)"></app-icon-delete>
+      </td>
       <td>{{ item.username | titlecase }}</td>
       <td><a [href]="'mailto:'+item.mail">{{ item.mail }}</a></td>
       <td [ngClass]="item.grants.toLowerCase()">

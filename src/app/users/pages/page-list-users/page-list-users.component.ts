@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { StateUser } from 'src/app/core/enums/state-user';
 import { User } from 'src/app/core/models/user';
@@ -15,13 +16,13 @@ export class PageListUsersComponent implements OnInit {
   public collection$: Observable<User[]>;
   public states = StateUser;
   public filters!: string[];
-  constructor(private usersService: UsersService) {
-    this.title = 'List orders';
+  constructor(private usersService: UsersService, private router: Router) {
+    this.title = 'List users';
     this.collection$ = this.usersService.collection;
   }
 
   ngOnInit(): void {
-    this.headers = ['User Name', 'Mail', 'Rôles'];
+    this.headers = ['Actions', 'User Name', 'Mail', 'Rôles'];
     this.filters = ['All', ...Object.values(StateUser)];
   }
 
@@ -39,5 +40,13 @@ export class PageListUsersComponent implements OnInit {
   public filterItems(expression: string): void {
     // console.log(expression);
     this.usersService.getItemsByFilter(expression);
+  }
+
+  public goToEdit(id: number): void {
+    this.router.navigate(['users', 'edit', id]);
+  }
+
+  public deleteItem(id: number): void {
+    this.usersService.delete(id).subscribe();
   }
 }

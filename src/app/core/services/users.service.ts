@@ -52,10 +52,22 @@ export class UsersService {
   /**
    * add item in collection
    */
+  public add(item: User): Observable<User> {
+    return this.http
+      .post<User>(`${this.urlApi}v1/users`, item)
+      .pipe(tap(() => this.refreshCollection()));
+  }
 
   /**
    * delete item in collection
    */
+  public delete(id: number): Observable<User> {
+    return this.http.delete<User>(`${this.urlApi}v1/users/${id}`).pipe(
+      tap(() => {
+        this.refreshCollection();
+      })
+    );
+  }
 
   /**
    * get item by id from collection
