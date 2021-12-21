@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { StateUser } from '../enums/state-user';
 import { User } from '../models/user';
 import { UsersService } from './users.service';
 
@@ -53,5 +54,10 @@ export class AuthService {
     this.token$.next(null);
     this.usersService.user$.next(null);
     this.router.navigate(['sign-in']);
+  }
+
+  public signUp(item: any): Observable<any> {
+    item.grants = 'ROLE_' + StateUser.ROLE_USER;
+    return this.http.post(`${environment.urlApi}v1/users`, item);
   }
 }

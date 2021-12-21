@@ -1,0 +1,9 @@
+a {
+  color: var(--app-dark);
+  display: inline-block;
+  margin-top: 15px;
+  &:hover {
+    text-decoration: none;
+    color: var(--app-primary);
+  }
+}
