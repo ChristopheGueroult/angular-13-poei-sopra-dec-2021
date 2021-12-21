@@ -58,10 +58,7 @@ export class PageListOrdersComponent implements OnInit {
     this.ordersService.getItemsBySearch(expression);
   }
   public filterItems(expression: string): void {
+    // console.log(expression);
     this.ordersService.getItemsByFilter(expression);
-  }
-
-  test() {
-    this.stateClicked = true;
   }
 }

@@ -38,22 +38,22 @@ export class OrdersService {
 
   public getItemsBySearch(expression: string): void {
     const lowerExpression = expression.toLowerCase();
+    console.log(lowerExpression);
     this.http
-      .get<Order[]>(this.urlApi + 'v1/orders')
+      .get<Order[]>(`${this.urlApi}v1/orders`)
       .pipe(
         tap((data) => {
           console.log(
-            data.filter(
-              (item) => item.customerCompany.indexOf(lowerExpression) !== -1
+            data.filter((item) =>
+              item.customerCompany.toLowerCase().includes(lowerExpression)
             )
           );
         }),
-        map((data) => {
-          return data.filter(
-            (item) =>
-              item.customerCompany.toLowerCase().indexOf(lowerExpression) !== -1
-          );
-        })
+        map((data) =>
+          data.filter((item) =>
+            item.customerCompany.toLowerCase().includes(lowerExpression)
+          )
+        )
       )
       .subscribe((data) => {
         this.collection$.next(data);
@@ -61,22 +61,21 @@ export class OrdersService {
   }
 
   public getItemsByFilter(expression: string): void {
-    const lowerExpression = expression.toUpperCase();
+    const upperExpression = expression.toUpperCase();
     this.http
-      .get<Order[]>(this.urlApi + 'v1/orders')
+      .get<Order[]>(`${this.urlApi}v1/orders`)
       .pipe(
         tap((data) => {
           console.log(
-            data.filter((item) => item.status.indexOf(lowerExpression) !== -1)
+            data.filter((item) => item.status.toUpperCase() === upperExpression)
           );
         }),
         map((data) => {
-          if (lowerExpression === 'ALL') {
+          if (upperExpression === 'ALL') {
             return data;
           } else {
             return data.filter(
-              (item) =>
-                item.status.toUpperCase().indexOf(lowerExpression) !== -1
+              (item) => item.status.toUpperCase() === upperExpression
             );
           }
         })

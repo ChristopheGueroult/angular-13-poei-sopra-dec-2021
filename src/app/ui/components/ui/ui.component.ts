@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/core/models/user';
-import { UsersService } from 'src/app/core/services/users.service';
+import { AuthService } from 'src/app/core/services/auth.service';
 /**
  * @description
  * this component is user interface. we did this component to keep
@@ -18,9 +18,9 @@ export class UiComponent implements OnInit {
    */
   public open: boolean;
   public user!: User | null;
-  constructor(private usersService: UsersService) {
+  constructor(private authService: AuthService) {
     this.open = true;
-    this.usersService.user$.subscribe((data) => {
+    this.authService.user$.subscribe((data) => {
       this.user = data;
     });
   }

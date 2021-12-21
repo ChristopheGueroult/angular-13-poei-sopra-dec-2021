@@ -12,6 +12,7 @@ export class PageListClientsComponent implements OnInit {
   public title: string;
   public headers!: string[];
   public collection$: Observable<Client[]>;
+  public filters!: string[];
   constructor(private clientsService: ClientsService) {
     this.title = 'List Clients';
     this.collection$ = this.clientsService.collection;
@@ -27,11 +28,20 @@ export class PageListClientsComponent implements OnInit {
       'Mail',
       'State',
     ];
+    this.filters = ['All', 'ACTIVE', 'INACTIVE'];
   }
 
   public changeState(item: Client): void {
     this.clientsService.changeState(item).subscribe((data) => {
       Object.assign(item, data);
     });
+  }
+
+  public selectItems(expression: string): void {
+    this.clientsService.getItemsBySearch(expression);
+  }
+  public filterItems(expression: string): void {
+    // console.log(expression);
+    this.clientsService.getItemsByFilter(expression);
   }
 }

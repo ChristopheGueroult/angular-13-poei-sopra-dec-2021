@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { BehaviorSubject, map, Observable, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { StateUser } from '../enums/state-user';
 import { User } from '../models/user';
@@ -9,20 +9,21 @@ import { User } from '../models/user';
   providedIn: 'root',
 })
 export class UsersService {
-  public user$: BehaviorSubject<User | null> = new BehaviorSubject<User | null>(
-    null
-  );
   /**
    * private collection
    */
-  private collection$!: Observable<User[]>;
+  private collection$: BehaviorSubject<User[]> = new BehaviorSubject([
+    new User(),
+  ]);
   private urlApi = environment.urlApi;
   constructor(private http: HttpClient) {
-    this.collection = this.http.get<User[]>(this.urlApi + 'v1/users').pipe(
-      tap((data) => {
-        console.log(data);
-      })
-    );
+    this.refreshCollection();
+  }
+
+  public refreshCollection() {
+    this.http.get<User[]>(this.urlApi + 'v1/users').subscribe((data) => {
+      this.collection$.next(data);
+    });
   }
 
   /**
@@ -30,13 +31,6 @@ export class UsersService {
    */
   public get collection(): Observable<User[]> {
     return this.collection$;
-  }
-
-  /**
-   * set collection
-   */
-  public set collection(obj: Observable<User[]>) {
-    this.collection$ = obj;
   }
 
   /**
@@ -66,4 +60,51 @@ export class UsersService {
   /**
    * get item by id from collection
    */
+
+  public getItemsBySearch(expression: string): void {
+    const lowerExpression = expression.toLowerCase();
+    console.log(lowerExpression);
+    this.http
+      .get<User[]>(`${this.urlApi}v1/users`)
+      .pipe(
+        tap((data) => {
+          console.log(
+            data.filter((item) =>
+              item.username.toLowerCase().includes(lowerExpression)
+            )
+          );
+        }),
+        map((data) =>
+          data.filter((item) =>
+            item.username.toLowerCase().includes(lowerExpression)
+          )
+        )
+      )
+      .subscribe((data) => {
+        this.collection$.next(data);
+      });
+  }
+
+  public getItemsByFilter(expression: string): void {
+    console.log(expression);
+
+    let upperExpression = expression.toUpperCase();
+    this.http
+      .get<User[]>(`${this.urlApi}v1/users`)
+      .pipe(
+        map((data) => {
+          if (upperExpression === 'ALL') {
+            return data;
+          } else {
+            upperExpression = 'ROLE_' + upperExpression;
+            return data.filter(
+              (item) => item.grants.toUpperCase() === upperExpression
+            );
+          }
+        })
+      )
+      .subscribe((data) => {
+        this.collection$.next(data);
+      });
+  }
 }

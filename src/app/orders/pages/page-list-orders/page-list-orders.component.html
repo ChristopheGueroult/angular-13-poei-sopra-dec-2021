@@ -1,4 +1,5 @@
 <app-template-full-width [title]="title" *ngIf="collection$ | async as collection">
+
   <div class="tr-head">
     <div class="d-flex flex-wrap align-items-center justify-content-between">
       <app-form-search (expression)="selectItems($event)"></app-form-search>
@@ -15,7 +16,7 @@
         <app-icon-edit (click)="goToEdit(item.id)"></app-icon-edit>
         <app-icon-delete (click)="deleteItem(item.id)"></app-icon-delete>
       </td>
-      <td>{{ item.customerCompany }}</td>
+      <td>{{ item.customerCompany | uppercase }}</td>
       <td>{{ item.label }}</td>
       <td>{{ item.type }}</td>
       <td>{{ item.adrEt | currency:'EUR' }}</td>

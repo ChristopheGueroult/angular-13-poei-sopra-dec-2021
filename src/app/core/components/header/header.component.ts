@@ -16,11 +16,8 @@ export class HeaderComponent implements OnInit {
    */
   public modeDay = true;
   public user$!: Subject<User | null>;
-  constructor(
-    private usersService: UsersService,
-    private authService: AuthService
-  ) {
-    this.user$ = this.usersService.user$;
+  constructor(private authService: AuthService) {
+    this.user$ = this.authService.user$;
   }
 
   ngOnInit(): void {}

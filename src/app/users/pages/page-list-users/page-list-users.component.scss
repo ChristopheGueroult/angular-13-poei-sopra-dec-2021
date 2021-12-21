@@ -1,0 +1,13 @@
+.role_admin {
+  background: var(--app-success);
+}
+.role_user {
+  background: var(--app-warning);
+}
+td a {
+  color: var(--app-primary);
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+}

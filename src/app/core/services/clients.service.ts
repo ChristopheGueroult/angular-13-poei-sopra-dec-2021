@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, map, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Client } from '../models/client';
 
@@ -75,4 +75,44 @@ export class ClientsService {
   /**
    * get item by id from collection
    */
+
+  public getItemsBySearch(expression: string): void {
+    const lowerExpression = expression.toLowerCase();
+    console.log(lowerExpression);
+    this.http
+      .get<Client[]>(`${this.urlApi}v1/customers`)
+      .pipe(
+        map((data) =>
+          data.filter((item) =>
+            item.company.toLowerCase().includes(lowerExpression)
+          )
+        )
+      )
+      .subscribe((data) => {
+        this.collection$.next(data);
+      });
+  }
+
+  public getItemsByFilter(expression: string): void {
+    const upperExpression = expression.toUpperCase();
+    this.http
+      .get<Client[]>(`${this.urlApi}v1/customers`)
+      .pipe(
+        map((data) => {
+          switch (upperExpression) {
+            case 'ALL':
+              return data;
+            case 'ACTIVE':
+              return data.filter((item) => item.active === true);
+            case 'INACTIVE':
+              return data.filter((item) => item.active === false);
+            default:
+              return data;
+          }
+        })
+      )
+      .subscribe((data) => {
+        this.collection$.next(data);
+      });
+  }
 }
