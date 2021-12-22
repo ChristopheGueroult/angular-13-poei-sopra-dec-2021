@@ -23,6 +23,7 @@ export class PageListClientsComponent implements OnInit {
 
   ngOnInit(): void {
     this.headers = [
+      'Action',
       'Company',
       'First Name',
       'Last Name',
