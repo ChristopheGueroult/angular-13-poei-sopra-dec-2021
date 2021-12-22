@@ -114,7 +114,15 @@ export class ClientsService {
    * get item by id from collection
    */
   public getItemById(id: number): Observable<Client> {
-    return this.http.get<Client>(`${this.urlApi}v1/customers/${id}`);
+    return this.http
+      .get<any>(`${this.urlApi}v1/customers/${id}`)
+      .pipe(
+        tap((data: any) =>
+          data.active === true
+            ? (data.active = StateClient.ACTIVE)
+            : (data.active = StateClient.INACTIVE)
+        )
+      );
   }
 
   public getItemsBySearch(expression: string): void {

@@ -3,6 +3,7 @@ import { Subject } from 'rxjs';
 import { User } from '../../models/user';
 import { AuthService } from '../../services/auth.service';
 import { UsersService } from '../../services/users.service';
+import { UtilsService } from '../../services/utils.service';
 
 @Component({
   selector: 'app-header',
@@ -16,8 +17,18 @@ export class HeaderComponent implements OnInit {
    */
   public modeDay = true;
   public user$!: Subject<User | null>;
-  constructor(private authService: AuthService) {
+  constructor(
+    private authService: AuthService,
+    private utilsService: UtilsService
+  ) {
     this.user$ = this.authService.user$;
+  }
+
+  public biggerSize() {
+    this.utilsService.biggerSize();
+  }
+  public normalSize() {
+    this.utilsService.normalSize();
   }
 
   ngOnInit(): void {}

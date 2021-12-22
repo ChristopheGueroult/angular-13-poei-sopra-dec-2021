@@ -1,4 +1,4 @@
-<app-ui>
+<app-ui [ngClass]="{'bigSize' : bigSize$ | async}">
 
   <!-- insere uicomponent html dans le DOM -->
   <app-icon-nav class="tr-open"></app-icon-nav>

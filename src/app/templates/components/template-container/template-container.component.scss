@@ -1,13 +1,19 @@
 .bandeau {
   padding: 15px;
   border-bottom: 1px solid var(--app-aside-bg-color);
+  min-height: 100px;
   h1 {
     font-size: var(--app-h1-fs);
     color: var(--app-primary);
     margin: 0;
   }
 }
+.parent {
+  height: calc(100vh - 120px);
+}
 .my-container {
+  width: 100%;
   max-width: 500px;
   margin: auto;
+  overflow-y: auto;
 }

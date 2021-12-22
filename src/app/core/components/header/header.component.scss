@@ -12,3 +12,21 @@
     color: var(--app-light);
   }
 }
+
+.fonts-size {
+  span {
+    display: inline-block;
+    margin: 0 5px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  span:first-child {
+    font-size: 20px;
+    margin-right: 10px;
+  }
+  span:last-child {
+    font-size: 16px;
+    margin-right: 10px;
+  }
+  font-size: 20px;
+}
