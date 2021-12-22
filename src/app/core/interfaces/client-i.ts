@@ -1,7 +1,8 @@
+import { StateClient } from '../enums/state-client';
 import { Order } from '../models/order';
 
 export interface ClientI {
-  active: boolean;
+  active: StateClient;
   company: string;
   firstname: string;
   id: number;

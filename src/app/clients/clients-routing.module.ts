@@ -7,7 +7,7 @@ import { PageListClientsComponent } from './pages/page-list-clients/page-list-cl
 const routes: Routes = [
   { path: '', component: PageListClientsComponent },
   { path: 'add', component: PageAddClientComponent },
-  { path: 'edit', component: PageEditClientComponent },
+  { path: 'edit/:id', component: PageEditClientComponent },
 ];
 
 @NgModule({

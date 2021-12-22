@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { StateClient } from 'src/app/core/enums/state-client';
 import { Client } from 'src/app/core/models/client';
 import { ClientsService } from 'src/app/core/services/clients.service';
 
@@ -13,7 +15,8 @@ export class PageListClientsComponent implements OnInit {
   public headers!: string[];
   public collection$: Observable<Client[]>;
   public filters!: string[];
-  constructor(private clientsService: ClientsService) {
+  public states = Object.values(StateClient);
+  constructor(private clientsService: ClientsService, private router: Router) {
     this.title = 'List Clients';
     this.collection$ = this.clientsService.collection;
   }
@@ -31,9 +34,11 @@ export class PageListClientsComponent implements OnInit {
     this.filters = ['All', 'ACTIVE', 'INACTIVE'];
   }
 
-  public changeState(item: Client): void {
-    this.clientsService.changeState(item).subscribe((data) => {
-      Object.assign(item, data);
+  public changeState(item: Client, event: Event): void {
+    const target = event.target as HTMLSelectElement;
+    const state = target.value as StateClient;
+    this.clientsService.changeState(item, state).subscribe((data) => {
+      // Object.assign(item, data);
     });
   }
 
@@ -43,5 +48,13 @@ export class PageListClientsComponent implements OnInit {
   public filterItems(expression: string): void {
     // console.log(expression);
     this.clientsService.getItemsByFilter(expression);
+  }
+
+  public goToEdit(id: number): void {
+    this.router.navigate(['clients', 'edit', id]);
+  }
+
+  public deleteItem(id: number): void {
+    this.clientsService.delete(id).subscribe();
   }
 }

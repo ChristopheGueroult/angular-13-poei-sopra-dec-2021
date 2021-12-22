@@ -26,3 +26,10 @@ td a {
     text-decoration: underline;
   }
 }
+
+.active {
+  background: var(--app-success);
+}
+.inactive {
+  background: var(--app-error);
+}

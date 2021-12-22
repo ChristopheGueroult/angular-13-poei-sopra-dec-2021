@@ -1,0 +1,63 @@
+<form [formGroup]="form" (ngSubmit)="register()">
+  <div class="mb-3">
+    <label for="company" class="form-label">Company Name</label>
+    <input formControlName="company" type="text" class="form-control" id="company">
+    <div *ngIf="form.controls['company'].invalid && (form.controls['company'].touched || errorMsg)"
+      class="alert alert-danger">invalid field</div>
+  </div>
+
+  <div class="mb-3">
+    <label for="firstname" class="form-label">Contact Firstname</label>
+    <input formControlName="firstname" type="text" class="form-control" id="firstname">
+    <div *ngIf="form.controls['firstname'].invalid && (form.controls['firstname'].touched || errorMsg)"
+      class="alert alert-danger">invalid
+      field</div>
+  </div>
+
+  <div class="mb-3">
+    <label for="lastname" class="form-label">Contact Lastname</label>
+    <input formControlName="lastname" type="text" class="form-control" id="lastname">
+    <div *ngIf="form.controls['lastname'].invalid && (form.controls['lastname'].touched || errorMsg)"
+      class="alert alert-danger">invalid
+      field</div>
+  </div>
+
+  <div class="mb-3">
+    <label for="mail" class="form-label">Contact Email</label>
+    <input formControlName="mail" type="text" class="form-control" id="mail">
+    <div *ngIf="form.controls['mail'].invalid && (form.controls['mail'].touched || errorMsg)"
+      class="alert alert-danger">invalid
+      field</div>
+  </div>
+
+  <div class="mb-3">
+    <label for="phone" class="form-label">Contact Phone</label>
+    <input formControlName="phone" type="text" class="form-control" id="phone">
+    <div *ngIf="form.controls['phone'].invalid && (form.controls['phone'].touched || errorMsg)"
+      class="alert alert-danger">invalid
+      field</div>
+  </div>
+
+  <div class="mb-3">
+    <label for="mobile" class="form-label">Contact Mobile</label>
+    <input formControlName="mobile" type="text" class="form-control" id="mobile">
+    <div *ngIf="form.controls['mobile'].invalid && (form.controls['mobile'].touched || errorMsg)"
+      class="alert alert-danger">invalid
+      field</div>
+  </div>
+
+  <div class="mb-3">
+    <label for="active" class="form-label">State</label>
+    <select formControlName="active" class="form-control" id="active">
+      <option *ngFor="let state of states" [ngValue]="state">{{ state }}</option>
+    </select>
+  </div>
+
+  <div class="mb-3">
+    <label for="notes" class="form-label">Notes</label>
+    <textarea formControlName="notes" class="form-control" id="notes"></textarea>
+  </div>
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+
+</form>

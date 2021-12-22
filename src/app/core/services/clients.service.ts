@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, map, Observable } from 'rxjs';
+import { BehaviorSubject, map, Observable, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { StateClient } from '../enums/state-client';
 import { Client } from '../models/client';
 
 @Injectable({
@@ -24,9 +25,22 @@ export class ClientsService {
    * refresh collection
    */
   public refreshCollection(): void {
-    this.http.get<Client[]>(this.urlApi + 'v1/customers').subscribe((data) => {
-      this.collection$.next(data);
-    });
+    this.http
+      .get<any[]>(this.urlApi + 'v1/customers')
+      .pipe(
+        tap((data) =>
+          data.map((item) =>
+            item.active === true
+              ? (item.active = StateClient.ACTIVE)
+              : (item.active = StateClient.INACTIVE)
+          )
+        )
+      )
+      .subscribe((data) => {
+        console.log(data);
+
+        this.collection$.next(data);
+      });
   }
   /**
    * get collection
@@ -51,40 +65,74 @@ export class ClientsService {
   /**
    * change state item
    */
-  public changeState(item: Client): Observable<Client> {
+  public changeState(item: Client, state: StateClient): Observable<Client> {
     let obj = new Client(item);
-    obj.active = !obj.active;
+    obj.active = state;
     return this.update(obj);
   }
 
   /**
    * update item in collection
    */
-  public update(item: Client): Observable<Client> {
-    return this.http.put<Client>(`${this.urlApi}v1/customers/${item.id}`, item);
+  public update(item: any): Observable<Client> {
+    item.active === StateClient.ACTIVE
+      ? (item.active = true)
+      : (item.active = false);
+    return this.http
+      .put<Client>(`${this.urlApi}v1/customers/${item.id}`, item)
+      .pipe(
+        tap(() => {
+          this.refreshCollection();
+        })
+      );
   }
 
   /**
    * add item in collection
    */
+  public add(item: any): Observable<Client> {
+    item.active === StateClient.ACTIVE
+      ? (item.active = true)
+      : (item.active = false);
+    return this.http
+      .post<Client>(`${this.urlApi}v1/customers`, item)
+      .pipe(tap(() => this.refreshCollection()));
+  }
 
   /**
    * delete item in collection
    */
+  public delete(id: number): Observable<Client> {
+    return this.http.delete<Client>(`${this.urlApi}v1/customers/${id}`).pipe(
+      tap(() => {
+        this.refreshCollection();
+      })
+    );
+  }
 
   /**
    * get item by id from collection
    */
+  public getItemById(id: number): Observable<Client> {
+    return this.http.get<Client>(`${this.urlApi}v1/customers/${id}`);
+  }
 
   public getItemsBySearch(expression: string): void {
     const lowerExpression = expression.toLowerCase();
     console.log(lowerExpression);
     this.http
-      .get<Client[]>(`${this.urlApi}v1/customers`)
+      .get<any[]>(`${this.urlApi}v1/customers`)
       .pipe(
         map((data) =>
           data.filter((item) =>
             item.company.toLowerCase().includes(lowerExpression)
+          )
+        ),
+        tap((data) =>
+          data.map((item) =>
+            item.active === true
+              ? (item.active = StateClient.ACTIVE)
+              : (item.active = StateClient.INACTIVE)
           )
         )
       )
@@ -96,7 +144,7 @@ export class ClientsService {
   public getItemsByFilter(expression: string): void {
     const upperExpression = expression.toUpperCase();
     this.http
-      .get<Client[]>(`${this.urlApi}v1/customers`)
+      .get<any[]>(`${this.urlApi}v1/customers`)
       .pipe(
         map((data) => {
           switch (upperExpression) {
@@ -109,7 +157,14 @@ export class ClientsService {
             default:
               return data;
           }
-        })
+        }),
+        tap((data) =>
+          data.map((item) =>
+            item.active === true
+              ? (item.active = StateClient.ACTIVE)
+              : (item.active = StateClient.INACTIVE)
+          )
+        )
       )
       .subscribe((data) => {
         this.collection$.next(data);
