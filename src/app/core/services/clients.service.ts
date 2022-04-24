@@ -26,7 +26,7 @@ export class ClientsService {
    */
   public refreshCollection(): void {
     this.http
-      .get<any[]>(this.urlApi + 'v1/customers')
+      .get<any[]>(this.urlApi + 'customers')
       .pipe(
         tap((data) =>
           data.map((item) =>
@@ -79,7 +79,7 @@ export class ClientsService {
       ? (item.active = true)
       : (item.active = false);
     return this.http
-      .put<Client>(`${this.urlApi}v1/customers/${item.id}`, item)
+      .put<Client>(`${this.urlApi}customers/${item.id}`, item)
       .pipe(
         tap(() => {
           this.refreshCollection();
@@ -95,7 +95,7 @@ export class ClientsService {
       ? (item.active = true)
       : (item.active = false);
     return this.http
-      .post<Client>(`${this.urlApi}v1/customers`, item)
+      .post<Client>(`${this.urlApi}customers`, item)
       .pipe(tap(() => this.refreshCollection()));
   }
 
@@ -103,7 +103,7 @@ export class ClientsService {
    * delete item in collection
    */
   public delete(id: number): Observable<Client> {
-    return this.http.delete<Client>(`${this.urlApi}v1/customers/${id}`).pipe(
+    return this.http.delete<Client>(`${this.urlApi}customers/${id}`).pipe(
       tap(() => {
         this.refreshCollection();
       })
@@ -115,7 +115,7 @@ export class ClientsService {
    */
   public getItemById(id: number): Observable<Client> {
     return this.http
-      .get<any>(`${this.urlApi}v1/customers/${id}`)
+      .get<any>(`${this.urlApi}customers/${id}`)
       .pipe(
         tap((data: any) =>
           data.active === true
@@ -129,7 +129,7 @@ export class ClientsService {
     const lowerExpression = expression.toLowerCase();
     console.log(lowerExpression);
     this.http
-      .get<any[]>(`${this.urlApi}v1/customers`)
+      .get<any[]>(`${this.urlApi}customers`)
       .pipe(
         map((data) =>
           data.filter((item) =>
@@ -152,7 +152,7 @@ export class ClientsService {
   public getItemsByFilter(expression: string): void {
     const upperExpression = expression.toUpperCase();
     this.http
-      .get<any[]>(`${this.urlApi}v1/customers`)
+      .get<any[]>(`${this.urlApi}customers`)
       .pipe(
         map((data) => {
           switch (upperExpression) {

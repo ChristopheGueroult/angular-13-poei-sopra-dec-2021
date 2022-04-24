@@ -21,9 +21,22 @@ export class UsersService {
   }
 
   public refreshCollection() {
-    this.http.get<User[]>(this.urlApi + 'v1/users').subscribe((data) => {
-      this.collection$.next(data);
-    });
+    this.http
+      .get<User[]>(this.urlApi + 'users')
+      .pipe(
+        map((datas) => {
+          return datas.map((data) => {
+            delete data.password;
+            return data;
+          });
+        }),
+        tap((data) => {
+          // console.log(data);
+        })
+      )
+      .subscribe((data) => {
+        this.collection$.next(data);
+      });
   }
 
   /**
@@ -47,16 +60,16 @@ export class UsersService {
    */
   public update(item: User): Observable<User> {
     return this.http
-      .put<User>(`${this.urlApi}v1/users/${item.id}`, item)
+      .patch<User>(`${this.urlApi}users/${item.id}`, item)
       .pipe(tap(() => this.refreshCollection()));
   }
 
   /**
    * add item in collection
    */
-  public add(item: User): Observable<User> {
+  public add(item: User): Observable<any> {
     return this.http
-      .post<User>(`${this.urlApi}v1/users`, item)
+      .post<User>(`${this.urlApi}register`, item)
       .pipe(tap(() => this.refreshCollection()));
   }
 
@@ -64,7 +77,7 @@ export class UsersService {
    * delete item in collection
    */
   public delete(id: number): Observable<User> {
-    return this.http.delete<User>(`${this.urlApi}v1/users/${id}`).pipe(
+    return this.http.delete<User>(`${this.urlApi}users/${id}`).pipe(
       tap(() => {
         this.refreshCollection();
       })
@@ -75,25 +88,31 @@ export class UsersService {
    * get item by id from collection
    */
   public getItemById(id: number): Observable<User> {
-    return this.http.get<User>(`${this.urlApi}v1/users/${id}`);
+    return this.http.get<User>(`${this.urlApi}users/${id}`).pipe(
+      map((data) => {
+        delete data.password;
+        return data;
+      }),
+      tap((data) => console.log(data))
+    );
   }
 
   public getItemsBySearch(expression: string): void {
     const lowerExpression = expression.toLowerCase();
     console.log(lowerExpression);
     this.http
-      .get<User[]>(`${this.urlApi}v1/users`)
+      .get<User[]>(`${this.urlApi}users`)
       .pipe(
         tap((data) => {
           console.log(
             data.filter((item) =>
-              item.username.toLowerCase().includes(lowerExpression)
+              item.lastname.toLowerCase().includes(lowerExpression)
             )
           );
         }),
         map((data) =>
           data.filter((item) =>
-            item.username.toLowerCase().includes(lowerExpression)
+            item.lastname.toLowerCase().includes(lowerExpression)
           )
         )
       )
@@ -107,13 +126,13 @@ export class UsersService {
 
     let upperExpression = expression.toUpperCase();
     this.http
-      .get<User[]>(`${this.urlApi}v1/users`)
+      .get<User[]>(`${this.urlApi}users`)
       .pipe(
         map((data) => {
           if (upperExpression === 'ALL') {
             return data;
           } else {
-            upperExpression = 'ROLE_' + upperExpression;
+            upperExpression = upperExpression;
             return data.filter(
               (item) => item.grants.toUpperCase() === upperExpression
             );

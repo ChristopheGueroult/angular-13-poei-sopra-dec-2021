@@ -14,15 +14,15 @@ export class FormSignInComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      userName: ['', Validators.required],
+      email: ['', Validators.required],
       password: ['', Validators.required],
     });
   }
 
   public register(): void {
-    const username = this.form.controls['userName'].value;
+    const email = this.form.controls['email'].value;
     const password = this.form.controls['password'].value;
-    this.authService.signIn(username, password).subscribe((data) => {
+    this.authService.signIn(email, password).subscribe((data) => {
       console.log(data);
     });
   }

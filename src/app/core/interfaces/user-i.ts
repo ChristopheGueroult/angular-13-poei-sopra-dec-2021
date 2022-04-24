@@ -1,6 +1,10 @@
+import { StateUser } from '../enums/state-user';
+
 export interface UserI {
-  grants: string;
   id: number;
-  mail: string;
-  username: string;
+  email: string;
+  firstname: string;
+  lastname: string;
+  grants: StateUser;
+  password?: string;
 }

@@ -4,7 +4,7 @@
   </div>
   <div>
     <div *ngIf="user$ | async as user">
-      <span>{{ user.username }}</span>
+      <span>{{ user.firstname }}</span>
       <span class="sign-out" (click)="signOut()">sign out</span>
     </div>
   </div>

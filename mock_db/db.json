@@ -1,0 +1,60 @@
+{
+  "users": [
+    {
+      "grants": "USER",
+      "email": "olivier@mail.com",
+      "password": "$2a$10$QP5hD2uOV62lOMv9/H0TTectWP9I4GNrcY2DjazQnqSmNNP/IPqX2",
+      "firstname": "Olivier",
+      "lastname": "Monges",
+      "id": 1
+    },
+    {
+      "email": "coderbaseit@mail.com",
+      "password": "$2a$10$QP5hD2uOV62lOMv9/H0TTectWP9I4GNrcY2DjazQnqSmNNP/IPqX2",
+      "id": 2,
+      "grants": "ADMIN",
+      "firstname": "christophe",
+      "lastname": "gueroult"
+    }
+  ],
+  "orders": [
+    {
+      "customerId": 1,
+      "adrEt": 1200,
+      "customerCompany": "Capgemini",
+      "id": 1,
+      "label": "Angular init",
+      "notes": "mes notes",
+      "numberOfDays": 1,
+      "status": "CANCELED",
+      "tva": 20,
+      "type": "Formation"
+    }
+  ],
+  "customers": [
+    {
+      "active": false,
+      "orders": [],
+      "company": "Capgemini",
+      "firstname": "Fabrice",
+      "id": 1,
+      "lastname": "Martin",
+      "mail": "martin@mail.com",
+      "mobile": "06 56 85 84 33",
+      "notes": "no notes",
+      "phone": "01 22 33 44 55"
+    },
+    {
+      "active": true,
+      "company": "M2I Formation",
+      "firstname": "Julien",
+      "id": 2,
+      "lastname": "Lamard",
+      "mail": "lamard@mail.com",
+      "mobile": "01 22 33 44 55",
+      "notes": "No notes",
+      "orders": [],
+      "phone": "06 11 22 33 44"
+    }
+  ]
+}

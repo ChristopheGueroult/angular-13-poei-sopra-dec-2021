@@ -31,7 +31,7 @@ export class OrdersService {
    * refresh collection
    */
   public refreshCollection() {
-    this.http.get<Order[]>(this.urlApi + 'v1/orders').subscribe((data) => {
+    this.http.get<Order[]>(this.urlApi + 'orders').subscribe((data) => {
       this.collection$.next(data);
     });
   }
@@ -40,7 +40,7 @@ export class OrdersService {
     const lowerExpression = expression.toLowerCase();
     console.log(lowerExpression);
     this.http
-      .get<Order[]>(`${this.urlApi}v1/orders`)
+      .get<Order[]>(`${this.urlApi}orders`)
       .pipe(
         tap((data) => {
           console.log(
@@ -63,7 +63,7 @@ export class OrdersService {
   public getItemsByFilter(expression: string): void {
     const upperExpression = expression.toUpperCase();
     this.http
-      .get<Order[]>(`${this.urlApi}v1/orders`)
+      .get<Order[]>(`${this.urlApi}orders`)
       .pipe(
         tap((data) => {
           console.log(
@@ -99,7 +99,7 @@ export class OrdersService {
    */
   public update(item: Order): Observable<Order> {
     return this.http
-      .put<Order>(`${this.urlApi}v1/orders/${item.id}`, item)
+      .put<Order>(`${this.urlApi}orders/${item.id}`, item)
       .pipe(tap(() => this.refreshCollection()));
   }
 
@@ -108,7 +108,7 @@ export class OrdersService {
    */
   public add(item: Order): Observable<Order> {
     return this.http
-      .post<Order>(`${this.urlApi}v1/orders`, item)
+      .post<Order>(`${this.urlApi}orders`, item)
       .pipe(tap(() => this.refreshCollection()));
   }
 
@@ -116,7 +116,7 @@ export class OrdersService {
    * delete item in collection
    */
   public delete(id: number): Observable<Order> {
-    return this.http.delete<Order>(`${this.urlApi}v1/orders/${id}`).pipe(
+    return this.http.delete<Order>(`${this.urlApi}orders/${id}`).pipe(
       tap(() => {
         this.refreshCollection();
       })
@@ -127,6 +127,6 @@ export class OrdersService {
    * get item by id from collection
    */
   public getItemById(id: number): Observable<Order> {
-    return this.http.get<Order>(`${this.urlApi}v1/orders/${id}`);
+    return this.http.get<Order>(`${this.urlApi}orders/${id}`);
   }
 }

@@ -29,7 +29,7 @@ export class AuthGuard implements CanActivate {
     | UrlTree {
     const token = localStorage.getItem('token');
     const user = localStorage.getItem('user');
-    // console.log(JSON.parse(user ? user : ''));
+    console.log(JSON.parse(user ? user : ''));
     if (user) {
       this.authService.user$.next(JSON.parse(user));
     }

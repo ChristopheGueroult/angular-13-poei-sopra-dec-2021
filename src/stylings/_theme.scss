@@ -21,3 +21,12 @@
   --app-warning: rgb(253, 171, 61);
   --app-success: rgb(0, 200, 117);
 }
+
+.icons {
+  display: inline-block;
+  cursor: pointer;
+  margin: 0 5px;
+}
+.icons.circle {
+  // css pour cercle bleu
+}

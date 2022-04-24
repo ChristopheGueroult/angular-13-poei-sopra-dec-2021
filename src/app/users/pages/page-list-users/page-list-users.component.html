@@ -16,8 +16,9 @@
         <app-icon-edit (click)="goToEdit(item.id)"></app-icon-edit>
         <app-icon-delete (click)="deleteItem(item.id)"></app-icon-delete>
       </td>
-      <td>{{ item.username | titlecase }}</td>
-      <td><a [href]="'mailto:'+item.mail">{{ item.mail }}</a></td>
+      <td>{{ item.firstname | titlecase }}</td>
+      <td>{{ item.lastname | titlecase }}</td>
+      <td><a [href]="'mailto:'+item.email">{{ item.email }}</a></td>
       <td [ngClass]="item.grants.toLowerCase()">
         <select (change)="changeState(item, $event)">
           <option *ngFor="let state of states | keyvalue" [value]="state.key" [selected]="item.grants === state.key">{{

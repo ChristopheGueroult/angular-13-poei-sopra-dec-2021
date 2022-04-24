@@ -22,7 +22,7 @@ export class PageListUsersComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.headers = ['Actions', 'User Name', 'Mail', 'Rôles'];
+    this.headers = ['Actions', 'First name', 'Last name', 'Email', 'Rôles'];
     this.filters = ['All', ...Object.values(StateUser)];
   }
 

@@ -24,23 +24,25 @@ export class AuthService {
   /**
    * get password and username to sign in
    */
-  public signIn(username: string, password: string): Observable<any> {
+  public signIn(email: string, password: string): Observable<any> {
     return this.http
-      .get<any>(
-        `${environment.urlApi}v1/users/login?username=${username}&password=${password}`
-      )
+      .post<any>(`${environment.urlApi}signin`, {
+        email: email,
+        password: password,
+      })
       .pipe(
         tap((data) => {
           const user = {
-            grants: data.grants,
-            id: data.id,
-            mail: data.mail,
-            username: data.username,
+            grants: data.user.grants,
+            id: data.user.id,
+            email: data.user.email,
+            firstname: data.user.firstname,
+            lastname: data.user.lastname,
           };
           // save user and faketoken dans local storage
           localStorage.setItem('user', JSON.stringify(user));
-          localStorage.setItem('token', JSON.stringify(data.token));
-          this.token$.next(data.token);
+          localStorage.setItem('token', JSON.stringify(data.accessToken));
+          this.token$.next(data.accessToken);
           this.user$.next(new User(user));
           this.router.navigate(['orders']);
         })
@@ -59,7 +61,7 @@ export class AuthService {
   }
 
   public signUp(item: any): Observable<any> {
-    item.grants = 'ROLE_' + StateUser.ROLE_USER;
-    return this.http.post(`${environment.urlApi}v1/users`, item);
+    item.grants = StateUser.USER;
+    return this.http.post(`${environment.urlApi}users`, item);
   }
 }
