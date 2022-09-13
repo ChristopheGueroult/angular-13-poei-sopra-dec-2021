@@ -15,20 +15,42 @@
       "grants": "ADMIN",
       "firstname": "christophe",
       "lastname": "gueroult"
+    },
+    {
+      "email": "julien@gmail.com",
+      "password": "$2a$10$f5J6kZfcl7dfGEaWbYxLE.3/ec.SWurCPEWrj/SWuYnxA4mstSWC2",
+      "firstname": "Olivier",
+      "lastname": "Monge",
+      "id": 3
     }
   ],
   "orders": [
     {
-      "customerId": 1,
-      "adrEt": 1200,
-      "customerCompany": "Capgemini",
       "id": 1,
-      "label": "Angular init",
-      "notes": "mes notes",
-      "numberOfDays": 1,
-      "status": "CANCELED",
-      "tva": 20,
-      "type": "Formation"
+      "clientId": 1,
+      "typePresta": "formation",
+      "designation": "formation angular",
+      "nbDays": 5,
+      "unitPrice": 1200,
+      "state": "OPTION"
+    },
+    {
+      "id": 2,
+      "clientId": 1,
+      "typePresta": "formation",
+      "designation": "formation angular",
+      "nbDays": 5,
+      "unitPrice": 1200,
+      "state": "OPTION"
+    },
+    {
+      "id": 3,
+      "clientId": 1,
+      "typePresta": "formation",
+      "designation": "formation angular",
+      "nbDays": 5,
+      "unitPrice": 1200,
+      "state": "OPTION"
     }
   ],
   "customers": [

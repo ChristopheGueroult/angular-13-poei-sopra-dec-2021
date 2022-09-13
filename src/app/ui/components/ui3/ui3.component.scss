@@ -1,0 +1,41 @@
+@import "~/src/stylings/layout";
+* {
+  background-color: rgba(0,0,0,.1);
+  border: 1px solid black;
+  padding: 15px;
+}
+.m-flex {
+  display: flex;
+}
+.items {
+  flex-grow: 1;
+}
+.myrow {
+  display: flex;
+  width: 100%;
+  // margin: 0 -15px;
+}
+.myrow.m-flex {
+  flex-direction: column;
+}
+.col-12 {
+  width: 100%;
+}
+.menu.m-flex {
+  flex-direction: column;
+}
+
+@media (min-width: $lg-breakpoint) {
+  .col-lg-4 {
+    width: 33.333333333333%;
+  }
+  .myrow.m-flex {
+    flex-direction: row;
+  }
+  .menu.m-flex {
+    flex-direction: row;
+  }
+  .buttons {
+    flex-grow: 1
+  }
+}

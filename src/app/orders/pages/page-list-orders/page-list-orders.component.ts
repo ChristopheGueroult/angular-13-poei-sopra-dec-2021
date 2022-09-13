@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { StateOrder } from 'src/app/core/enums/state-order';
 import { Order } from 'src/app/core/models/order';
+import { ClientsService } from 'src/app/core/services/clients.service';
 import { OrdersService } from 'src/app/core/services/orders.service';
 
 @Component({
@@ -16,6 +17,7 @@ export class PageListOrdersComponent implements OnInit {
   public filters!: string[];
   public collection$: Subject<Order[]>;
   public states = Object.values(StateOrder);
+
   stateClicked = false;
   constructor(private ordersService: OrdersService, private router: Router) {
     this.title = 'List orders';
